@@ -21,7 +21,7 @@ class User extends Authenticatable
         'fullname',
         'birthday',
         'email',
-        'password',        
+        'password',
         'address',
         'role_id',
     ];
@@ -43,8 +43,15 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'password' => 'hashed',
     ];
+
+    public function getAllUsers(){
+        return User::all();
+    }
+
+    public function getUser($id){
+        return User::find($id);
+    }
 
     public function role(){
         return $this->belongsTo('App\Models\Role');
@@ -52,5 +59,9 @@ class User extends Authenticatable
 
     public function favorite(){
         return $this->hasMany('App\Models\Favorite');
+    }
+
+    public function product(){
+        return $this->hasMany('App\Models\Product');
     }
 }
